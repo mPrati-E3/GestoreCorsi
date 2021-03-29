@@ -46,8 +46,8 @@
             </HBox>
             <TableView fx:id="tblCorso" editable="true" prefHeight="200.0">
               <columns>
-                <TableColumn fx:id="colCorso" editable="false" prefWidth="291.2000058889389" sortable="false" text="Corso" />
-                <TableColumn fx:id="colNIscritti" editable="false" minWidth="0.0" prefWidth="87.99993896484375" sortable="false" text="N° Iscritti" />
+                <TableColumn fx:id="colCorso" editable="false" prefWidth="291.2000058889389" resizable="false" sortable="false" text="Corso" />
+                <TableColumn fx:id="colNIscritti" editable="false" minWidth="0.0" prefWidth="87.99993896484375" resizable="false" sortable="false" text="N° Iscritti" />
               </columns>
                <VBox.margin>
                   <Insets bottom="20.0" />
@@ -74,9 +74,9 @@
             </Label>
             <TableView fx:id="tblStudenti" prefHeight="200.0">
               <columns>
-                <TableColumn fx:id="colNomeStudente" editable="false" prefWidth="134.39996945858002" sortable="false" text="Nome Studente" />
-                <TableColumn fx:id="colCognomeStudente" editable="false" prefWidth="150.4000244140625" sortable="false" text="Cognome Studente" />
-                  <TableColumn fx:id="colCDS" editable="false" prefWidth="95.20001220703125" sortable="false" text="CDS" />
+                <TableColumn fx:id="colNomeStudente" editable="false" prefWidth="134.39996945858002" resizable="false" sortable="false" text="Nome Studente" />
+                <TableColumn fx:id="colCognomeStudente" editable="false" prefWidth="150.4000244140625" resizable="false" sortable="false" text="Cognome Studente" />
+                  <TableColumn fx:id="colCDS" editable="false" prefWidth="95.20001220703125" resizable="false" sortable="false" text="CDS" />
               </columns>
             </TableView>
          </children>

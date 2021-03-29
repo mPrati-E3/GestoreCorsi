@@ -65,6 +65,15 @@ public class FXMLController {
     void doCerca(ActionEvent event) {
     	
     	List<Studente> StudentiDaStampare = this.model.StampaStudenti(dropCorsi.getValue());
+    	
+    	for ( int i = 0; i<tblStudenti.getItems().size(); i++) {
+    	    tblStudenti.getItems().clear();
+    	}
+    	
+    	//i valori saranno entrati nella table?
+        for (int i=0; i<StudentiDaStampare.size(); i++) {
+        	tblStudenti.getItems().add(StudentiDaStampare.get(i));
+        }
 
     }
 
@@ -73,6 +82,14 @@ public class FXMLController {
     	
     	List<Corso> CorsiDaStampare = this.model.StampaCorsi(dropPeriodoDidattico.getValue());
     	
+    	for ( int i = 0; i<tblCorso.getItems().size(); i++) {
+    	    tblCorso.getItems().clear();
+    	}
+    	
+    	//i valori saranno entrati nella table?
+        for (int i=0; i<CorsiDaStampare.size(); i++) {
+        	tblCorso.getItems().add(CorsiDaStampare.get(i));
+        }
     	
 
     }
@@ -92,8 +109,13 @@ public class FXMLController {
         assert colCognomeStudente != null : "fx:id=\"colCognomeStudente\" was not injected: check your FXML file 'Scene.fxml'.";
         assert colCDS != null : "fx:id=\"colCDS\" was not injected: check your FXML file 'Scene.fxml'.";
         
-        dropPeriodoDidattico.setValue("Primo semestre");
-        dropPeriodoDidattico.setValue("Secondo semestre");
+        dropPeriodoDidattico.getItems().add("Primo Semestre");
+        dropPeriodoDidattico.getItems().add("Secondo Semestre");
+        
+        //fare anche per l'altra drop
+        /*for (int i=0; i<this.model.DammiTuttiCorsi.size(); i++) {
+        	dropPeriodoDidattico.getItems().add("");
+        }*/
 
     }
 

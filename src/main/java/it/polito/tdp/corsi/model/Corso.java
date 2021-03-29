@@ -2,8 +2,8 @@ package it.polito.tdp.corsi.model;
 
 public class Corso {
 	
-	String Nome;
-	int Iscritti;
+	private String Nome;
+	private int Iscritti;
 	
 	public Corso(String nome, int iscritti) {
 		super();
