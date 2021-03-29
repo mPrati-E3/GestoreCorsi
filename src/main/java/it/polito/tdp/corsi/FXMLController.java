@@ -1,9 +1,12 @@
 package it.polito.tdp.corsi;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.corsi.model.Corso;
 import it.polito.tdp.corsi.model.Model;
+import it.polito.tdp.corsi.model.Studente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,22 +26,22 @@ public class FXMLController {
     private URL location;
 
     @FXML
-    private ChoiceBox<?> dropPeriodoDidattico;
+    private ChoiceBox<String> dropPeriodoDidattico;
 
     @FXML
     private Button btnStampa;
 
     @FXML
-    private TableView<?> tblCorso;
+    private TableView<Corso> tblCorso;
 
     @FXML
-    private TableColumn<?, ?> colCorso;
+    private TableColumn<Corso, String> colCorso;
 
     @FXML
-    private TableColumn<?, ?> colNIscritti;
+    private TableColumn<Corso, Integer> colNIscritti;
 
     @FXML
-    private ChoiceBox<?> dropCorsi;
+    private ChoiceBox<String> dropCorsi;
 
     @FXML
     private Button btnCerca;
@@ -47,24 +50,30 @@ public class FXMLController {
     private Label lblCorsoSelezionato;
 
     @FXML
-    private TableView<?> tblStudenti;
+    private TableView<Studente> tblStudenti;
 
     @FXML
-    private TableColumn<?, ?> colNomeStudente;
+    private TableColumn<Studente, String> colNomeStudente;
 
     @FXML
-    private TableColumn<?, ?> colCognomeStudente;
+    private TableColumn<Studente, String> colCognomeStudente;
 
     @FXML
-    private TableColumn<?, ?> colCDS;
+    private TableColumn<Studente, String> colCDS;
 
     @FXML
     void doCerca(ActionEvent event) {
+    	
+    	List<Studente> StudentiDaStampare = this.model.StampaStudenti(dropCorsi.getValue());
 
     }
 
     @FXML
     void doStampa(ActionEvent event) {
+    	
+    	List<Corso> CorsiDaStampare = this.model.StampaCorsi(dropPeriodoDidattico.getValue());
+    	
+    	
 
     }
 
@@ -82,6 +91,9 @@ public class FXMLController {
         assert colNomeStudente != null : "fx:id=\"colNomeStudente\" was not injected: check your FXML file 'Scene.fxml'.";
         assert colCognomeStudente != null : "fx:id=\"colCognomeStudente\" was not injected: check your FXML file 'Scene.fxml'.";
         assert colCDS != null : "fx:id=\"colCDS\" was not injected: check your FXML file 'Scene.fxml'.";
+        
+        dropPeriodoDidattico.setValue("Primo semestre");
+        dropPeriodoDidattico.setValue("Secondo semestre");
 
     }
 
