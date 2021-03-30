@@ -2,9 +2,9 @@ package it.polito.tdp.corsi.model;
 
 public class Studente {
 	
-	String Nome;
-	String Cognome;
-	String CDS;
+	private String Nome = "";
+	private String Cognome = "";
+	private String CDS;
 	
 	public Studente(String nome, String cognome, String cDS) {
 		super();

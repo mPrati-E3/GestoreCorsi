@@ -14,6 +14,16 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.time.LocalDate;
+import java.util.Collection;
+
+
+import javafx.collections.ObservableList;
+
+
+
 
 public class FXMLController {
 	
@@ -53,22 +63,29 @@ public class FXMLController {
     private TableView<Studente> tblStudenti;
 
     @FXML
-    private TableColumn<Studente, String> colNomeStudente;
+    private TableColumn <Studente, String> colNomeStudente;
 
     @FXML
-    private TableColumn<Studente, String> colCognomeStudente;
+    private TableColumn <Studente, String> colCognomeStudente;
 
     @FXML
-    private TableColumn<Studente, String> colCDS;
+    private TableColumn <Studente, String> colCDS; 
 
     @FXML
     void doCerca(ActionEvent event) {
     	
     	List<Studente> StudentiDaStampare = this.model.StampaStudenti(dropCorsi.getValue());
     	
+    	lblCorsoSelezionato.setText(dropCorsi.getValue());
+    	
     	for ( int i = 0; i<tblStudenti.getItems().size(); i++) {
     	    tblStudenti.getItems().clear();
     	}
+    	
+    	colNomeStudente.setCellValueFactory(new PropertyValueFactory("Nome"));
+    	colCognomeStudente.setCellValueFactory(new PropertyValueFactory("Cognome"));
+    	colCDS.setCellValueFactory(new PropertyValueFactory("CDS"));
+
     	
     	//i valori saranno entrati nella table?
         for (int i=0; i<StudentiDaStampare.size(); i++) {
@@ -80,11 +97,18 @@ public class FXMLController {
     @FXML
     void doStampa(ActionEvent event) {
     	
+    	if (dropPeriodoDidattico.getValue()==null) {
+    		return;
+    	}
+    	
     	List<Corso> CorsiDaStampare = this.model.StampaCorsi(dropPeriodoDidattico.getValue());
     	
     	for ( int i = 0; i<tblCorso.getItems().size(); i++) {
     	    tblCorso.getItems().clear();
     	}
+    	
+    	colCorso.setCellValueFactory(new PropertyValueFactory("Nome"));
+    	colNIscritti.setCellValueFactory(new PropertyValueFactory("Iscritti"));
     	
     	//i valori saranno entrati nella table?
         for (int i=0; i<CorsiDaStampare.size(); i++) {
@@ -105,21 +129,27 @@ public class FXMLController {
         assert btnCerca != null : "fx:id=\"btnCerca\" was not injected: check your FXML file 'Scene.fxml'.";
         assert lblCorsoSelezionato != null : "fx:id=\"lblCorsoSelezionato\" was not injected: check your FXML file 'Scene.fxml'.";
         assert tblStudenti != null : "fx:id=\"tblStudenti\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert colNomeStudente != null : "fx:id=\"colNomeStudente\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert colCognomeStudente != null : "fx:id=\"colCognomeStudente\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert colCDS != null : "fx:id=\"colCDS\" was not injected: check your FXML file 'Scene.fxml'.";
+        //assert colNomeStudente != null : "fx:id=\"colNomeStudente\" was not injected: check your FXML file 'Scene.fxml'.";
+        //assert colCognomeStudente != null : "fx:id=\"colCognomeStudente\" was not injected: check your FXML file 'Scene.fxml'.";
+        //assert colCDS != null : "fx:id=\"colCDS\" was not injected: check your FXML file 'Scene.fxml'.";
         
+        //inserisco i possibili periodi didattici nella prima drop
         dropPeriodoDidattico.getItems().add("Primo Semestre");
         dropPeriodoDidattico.getItems().add("Secondo Semestre");
-        
-        //fare anche per l'altra drop
-        /*for (int i=0; i<this.model.DammiTuttiCorsi.size(); i++) {
-        	dropPeriodoDidattico.getItems().add("");
-        }*/
+      
 
     }
 
     public void setModel(Model m) {
+    	
     	this.model=m;
+    	
+    	//inserisco i corsi nella drop
+    	//devo farlo qua e non in inizialize perchè prima non ho il model disponibile
+        List <String> C = this.model.DammiTuttiCorsi();
+        for (int i=0; i<C.size(); i++) {
+        	dropCorsi.getItems().add(C.get(i));
+        }
+        
     }
 }

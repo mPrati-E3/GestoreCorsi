@@ -29,4 +29,11 @@ public class Model {
 		return S;
 	}
 
+	public List<String> DammiTuttiCorsi() {
+		
+		List <String> C = DAO.tuttiCorsi();
+		
+		return C;
+	}
+
 }

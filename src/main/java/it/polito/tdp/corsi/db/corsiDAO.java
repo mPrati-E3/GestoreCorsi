@@ -167,6 +167,51 @@ public class corsiDAO {
 			
 		}
 
+		public List<String> tuttiCorsi() {
+			
+			List<String> C = new ArrayList<String>();
+			
+			String sql = "SELECT DISTINCT nome FROM corso";
+			
+			//FACTORY: creo un oggetto si una clsse senza sapere il tipo della classe
+			//(non uso new perchè non so il nome della classe)
+			//uso un metodo fornito da un'altra clsse che internamente fa new e riconoscerà
+			//il tipo di classe effettivo
+			try {
+				
+				Connection conn = DBConnect.getConnection();
+				
+				//veicolo per passare e ricevere le query al database
+				PreparedStatement st = conn.prepareStatement(sql);
+				
+				//salvo il modo per ottenere il risultato della query fatta e passata tramite lo Statement
+				ResultSet res = st.executeQuery();
+				//per modificare il database: executeUpdate()
+				//per roba generica: execute()
+				
+				//itero la tabella a cui res punta tramite next
+				while (res.next()) {
+					
+					C.add(res.getString("nome"));
+					
+			
+				}
+				
+				st.close();
+				conn.close();
+				
+				
+				return C;
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return null;
+			
+		}
+
 
 	}
 
